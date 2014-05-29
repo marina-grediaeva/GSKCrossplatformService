@@ -12,22 +12,19 @@ namespace GSKCrossplatformService
     // ПРИМЕЧАНИЕ. Чтобы запустить клиент проверки WCF для тестирования службы, выберите элементы Service1.svc или Service1.svc.cs в обозревателе решений и начните отладку.
     public class GSKCrossplatformService : IGSKCrossplatformService
     {
-        public string GetData(int value)
+        #region IGSKCrossplatformService
+
+        public Model.NameSurname GetNameSurname(string _Name, string _Surname)
         {
-            return string.Format("You entered: {0}", value);
+            Model.NameSurname model = new Model.NameSurname()
+            {
+                Name = _Name,
+                Surname = _Surname
+            };
+            return model;
+
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
+        #endregion
     }
 }
