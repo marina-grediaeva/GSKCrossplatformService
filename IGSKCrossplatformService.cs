@@ -12,11 +12,10 @@ namespace GSKCrossplatformService
     [ServiceContract]
     public interface IGSKCrossplatformService
     {
-
+        //отсылает null если подключение удалось, если не удалось, то отсылает текст возникшего исключения
         [OperationContract]
-        [WebGet(UriTemplate = "/{_Name}/{_Surname}")]
-        Model.NameSurname GetNameSurname(string _Name, string _Surname);
-
+        [WebGet(UriTemplate = "/GetNameSurname/?Name={_Username}&?Surname={_Password}")]
+        string TryConnect(string _Username, string _Password);
     }
 
 }

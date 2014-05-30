@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
@@ -14,15 +17,39 @@ namespace GSKCrossplatformService
     {
         #region IGSKCrossplatformService
 
-        public Model.NameSurname GetNameSurname(string _Name, string _Surname)
+        public string TryConnect(string _Username, string _Password)
         {
-            Model.NameSurname model = new Model.NameSurname()
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["SQLSERVER_CONNECTION_STRING"]))
             {
-                Name = _Name,
-                Surname = _Surname
-            };
-            return model;
+                try
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
 
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        cmd.CommandText = @" SELECT * 
+                                             FROM   `users`
+                                             WHERE  `login` = @login and
+                                                    `password = @password;";
+
+                        cmd.Parameters.AddWithValue("@login", _Username);
+                        cmd.Parameters.AddWithValue("@Password", _Password);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                                return null;
+                            else
+                                return "Имя пользователи и/или пароль не опознаны";
+                        }
+
+                    }
+                }
+                catch (Exception exc)
+                {
+                    return exc.Message;
+                }
+            }
         }
 
         #endregion
