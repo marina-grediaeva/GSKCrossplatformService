@@ -20,8 +20,10 @@ namespace GSKCrossplatformService
 
         public string TryConnect(string _Username, string _Password)
         {
-
-            using (MySqlConnection conn = new MySqlConnection(@"server=c64a04ae-21e2-4ac9-be43-a33a0149e801.mysql.sequelizer.com;database=dbc64a04ae21e24ac9be43a33a0149e801;uid=jfcpgrpkstftvcmc;pwd=vkxeJQXaAgWobMUGtTbGUXFUtNhdYBVEDDRnopHPwejh2vweaNzgf6sFMLT4HUi8"))
+            string c = ConfigurationManager.AppSettings["SQLSERVER_CONNECTION_STRING"];
+            if(String.IsNullOrEmpty(c))
+                c = @"server=c64a04ae-21e2-4ac9-be43-a33a0149e801.mysql.sequelizer.com;database=dbc64a04ae21e24ac9be43a33a0149e801;uid=jfcpgrpkstftvcmc;pwd=vkxeJQXaAgWobMUGtTbGUXFUtNhdYBVEDDRnopHPwejh2vweaNzgf6sFMLT4HUi8";
+            using (MySqlConnection conn = new MySqlConnection(c))
             {
                 try
                 {
