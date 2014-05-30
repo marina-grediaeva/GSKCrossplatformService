@@ -14,8 +14,10 @@ namespace GSKCrossplatformService
     {
         //отсылает null если подключение удалось, если не удалось, то отсылает текст возникшего исключения
         [OperationContract]
-        [WebGet(UriTemplate = "/GetNameSurname/?Name={_Username}&?Surname={_Password}")]
+        [WebGet(UriTemplate = "/TryConnect/?username={_Username}&password={_Password}")]
         string TryConnect(string _Username, string _Password);
+
+
     }
 
 }

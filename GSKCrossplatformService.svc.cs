@@ -23,19 +23,20 @@ namespace GSKCrossplatformService
             string c = ConfigurationManager.AppSettings["SQLSERVER_CONNECTION_STRING"];
             if(String.IsNullOrEmpty(c))
                 c = @"server=c64a04ae-21e2-4ac9-be43-a33a0149e801.mysql.sequelizer.com;database=dbc64a04ae21e24ac9be43a33a0149e801;uid=jfcpgrpkstftvcmc;pwd=vkxeJQXaAgWobMUGtTbGUXFUtNhdYBVEDDRnopHPwejh2vweaNzgf6sFMLT4HUi8";
-            using (MySqlConnection conn = new MySqlConnection(c))
+            string connectionString = c + ";charset=utf8";
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 try
                 {
+
                     conn.Open();
                     using (MySqlCommand cmd = conn.CreateCommand())
                     {
 
+
                         cmd.CommandType = System.Data.CommandType.Text;
-                        cmd.CommandText = @" SELECT * 
-                                             FROM   `users`
-                                             WHERE  `login` = @login and
-                                                    `password` = @password;";
+
+                        cmd.CommandText = " SELECT *  FROM  `users` WHERE `login` = @login AND `password` = @password ;";
 
                         cmd.Parameters.AddWithValue("@login", _Username);
                         cmd.Parameters.AddWithValue("@password", _Password);
