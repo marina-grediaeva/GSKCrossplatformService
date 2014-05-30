@@ -19,7 +19,7 @@ namespace GSKCrossplatformService
 
         public string TryConnect(string _Username, string _Password)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["SQLSERVER_CONNECTION_STRING"]))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["MYSQL_CONNECTION_STRING"]))
             {
                 try
                 {
