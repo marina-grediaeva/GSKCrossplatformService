@@ -35,7 +35,7 @@ namespace GSKCrossplatformService
                         cmd.CommandText = @" SELECT * 
                                              FROM   `users`
                                              WHERE  `login` = @login and
-                                                    `password = @password;";
+                                                    `password` = @password;";
 
                         cmd.Parameters.AddWithValue("@login", _Username);
                         cmd.Parameters.AddWithValue("@password", _Password);
