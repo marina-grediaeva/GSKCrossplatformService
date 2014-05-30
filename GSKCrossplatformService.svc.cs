@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using MySql.Data.MySqlClient;
 
 namespace GSKCrossplatformService
 {
@@ -19,12 +20,13 @@ namespace GSKCrossplatformService
 
         public string TryConnect(string _Username, string _Password)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["MYSQL_CONNECTION_STRING"]))
+
+            using (MySqlConnection conn = new MySqlConnection(@"server=c64a04ae-21e2-4ac9-be43-a33a0149e801.mysql.sequelizer.com;database=dbc64a04ae21e24ac9be43a33a0149e801;uid=jfcpgrpkstftvcmc;pwd=vkxeJQXaAgWobMUGtTbGUXFUtNhdYBVEDDRnopHPwejh2vweaNzgf6sFMLT4HUi8"))
             {
                 try
                 {
                     conn.Open();
-                    using (SqlCommand cmd = conn.CreateCommand())
+                    using (MySqlCommand cmd = conn.CreateCommand())
                     {
 
                         cmd.CommandType = System.Data.CommandType.Text;
@@ -34,8 +36,8 @@ namespace GSKCrossplatformService
                                                     `password = @password;";
 
                         cmd.Parameters.AddWithValue("@login", _Username);
-                        cmd.Parameters.AddWithValue("@Password", _Password);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        cmd.Parameters.AddWithValue("@password", _Password);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.HasRows)
                                 return null;

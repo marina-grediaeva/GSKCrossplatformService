@@ -2,3 +2,4 @@ C:\Marina.Duka\GSKCrossplatformService\GSKCrossplatformService\bin\GSKCrossplatf
 C:\Marina.Duka\GSKCrossplatformService\GSKCrossplatformService\bin\GSKCrossplatformService.pdb
 C:\Marina.Duka\GSKCrossplatformService\GSKCrossplatformService\obj\Debug\GSKCrossplatformService.dll
 C:\Marina.Duka\GSKCrossplatformService\GSKCrossplatformService\obj\Debug\GSKCrossplatformService.pdb
+C:\Marina.Duka\GSKCrossplatformService\GSKCrossplatformService\obj\Debug\GSKCrossplatformService.csprojResolveAssemblyReference.cache
